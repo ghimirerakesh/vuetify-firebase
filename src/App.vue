@@ -1,31 +1,70 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
-  </div>
+  <v-app id="inspire">
+    <v-toolbar
+      class="purple accent-4"
+      fixed
+      dark
+      app
+      clipped-right
+    >
+      <v-toolbar-side-icon 
+      @click.stop="drawer = !drawer"
+      class="hidden-sm-and-up"
+      ></v-toolbar-side-icon>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" style="cursor:pointer">Toolbar</router-link>
+      </v-toolbar-title>
+      <v-spacer></v-spacer>
+        <v-toolbar-items class="hidden-xs-only">
+          <v-btn 
+          flat 
+          v-for="item in menuItems" 
+          :key="item.title"
+          :to="item.link"
+          >
+            <v-icon>{{item.icon}}</v-icon>
+            {{item.title}}
+          </v-btn>
+        </v-toolbar-items>
+    </v-toolbar>
+    <v-navigation-drawer
+      v-model="drawer"
+      fixed
+      app
+    >
+      <v-list>
+        <v-list-tile 
+        v-for="item in menuItems" 
+        :key="item.title"
+        :to="item.link"
+        >
+          <v-list-tile-action>
+            <v-icon>{{item.icon}}</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>{{item.title}}</v-list-tile-content>
+        </v-list-tile>
+      </v-list>
+
+    </v-navigation-drawer>
+    <main>
+      <router-view></router-view>
+    </main>
+  </v-app>
 </template>
 
-<style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<script>
+  export default {
+    data (){
+      return{
+        drawer: false,
+        menuItems: [
+          {icon: 'supervisor_account', title: 'View Meetups',link: '/meetups'},
+          {icon: 'room', title: 'Organize Meetup',link: '/meetup/new'},
+          {icon: 'person', title: 'Profile',link:'/profile'},
+          {icon: 'face', title: 'Sign Up',link:'/signup'},
+          {icon: 'lock_open', title: 'Sign In',link:'/signin'}
+        ]
+      }  
+    }
+  }
+</script>
