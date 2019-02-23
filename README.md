@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # vuetify-app
 
 ## Project setup
@@ -27,3 +28,7 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+=======
+# vuetify-firebase
+An app based on vue and firebase
+>>>>>>> c70db9fceac2283705c2962eedca9f0a1b66f309
